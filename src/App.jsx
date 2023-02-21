@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BiClipboard } from "react-icons/bi";
 import app from "./App.css";
-import  {Uppercase,Lowercase,numbers,symbols} from './character'
+import { Uppercase, Lowercase, numbers, symbols } from "./character";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -11,33 +11,37 @@ function App() {
   const [includenumber, setInlcudenumber] = useState(false);
   const [includesymbol, setInlcudesymbol] = useState(false);
 
-
   const handlegenerator = (e) => {
-    let characterlist = ''
+    let characterlist = "";
 
-    if (includelowercase){
-      characterlist = characterlist + Lowercase
+    if (includelowercase) {
+      characterlist = characterlist + Lowercase;
     }
 
-    if(includeuppercase){
-      characterlist += Uppercase
+    if (includeuppercase) {
+      characterlist += Uppercase;
     }
 
-    if(includenumber){
-      characterlist+= numbers
+    if (includenumber) {
+      characterlist += numbers;
     }
-    if(includesymbol) {
-      characterlist += symbols
+    if (includesymbol) {
+      characterlist += symbols;
     }
 
-    setPassword(characterlist)
-  }
+    setPassword(createPassword(characterlist));
+  };
 
-
-  const generatePassword = (characterlist) =>{
-    
-
-  }
+const createPassword = (characterlist) =>{
+      let password = ''
+      const characterlistLength = characterlist.length
+      
+      for (let i = 0; i < passwordlength; i++) {
+        const characterIndex = Math.round(Math.random()*characterlistLength)
+        password += characterlist.charAt(characterIndex)
+      }
+      return password
+    }
 
   return (
     <>
@@ -114,8 +118,11 @@ function App() {
         </div>
 
         <div className="mx-20">
-          <button onClick={handlegenerator} className="bg-indigo-600 font-bold text-black  rounded-lg w-52 p-2 m-4   ">
-             Generate Password
+          <button
+            onClick={handlegenerator}
+            className="bg-indigo-600 font-bold text-black  rounded-lg w-52 p-2 m-4   "
+          >
+            Generate Password
           </button>
         </div>
       </div>
